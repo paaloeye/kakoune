@@ -263,7 +263,8 @@ void write(int fd, StringView data)
             count -= written;
         }
         else if (errno == EAGAIN and not atomic and EventManager::has_instance())
-            EventManager::instance().handle_next_events(EventMode::Urgent, nullptr, std::chrono::nanoseconds{});
+            EventManager::instance().handle_next_events(EventMode::Urgent, nullptr,
+                                                        std::chrono::nanoseconds{1'000});
         else
             throw file_access_error(fd, strerror(errno));
     }

@@ -34,7 +34,11 @@ main() {
   else
     session_path="${TMPDIR:-/tmp}/kakoune/${USER}/$session"
   fi
-  trap "rm -Rf $work" EXIT
+  cleanup_trap() {
+    rm -f "$session_path"
+    exit 1
+  }
+  trap cleanup_trap INT TERM
 
   number_tests=0
   number_failures=0

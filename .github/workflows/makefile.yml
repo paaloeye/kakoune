@@ -1,11 +1,12 @@
 name: Makefile CI
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
 jobs:
   build:
+    timeout-minutes: 5
     strategy:
       matrix:
         os: [ubuntu, macos]
